@@ -10,6 +10,7 @@ const jwt = new JwtHelperService();
 class DecodedToken {
   exp: number;
   username: string;
+  admin: boolean;
 }
 
 @Injectable({
@@ -56,5 +57,9 @@ export class AuthService {
 
   public getUsername(): string {
     return this.decodedToken.username;
+  }
+
+  public isAdmin(): boolean {
+    return this.decodedToken.admin;
   }
 }

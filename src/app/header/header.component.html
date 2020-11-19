@@ -1,8 +1,20 @@
-<nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-light navbar-expand-lg" style="background-color: AliceBlue;">
   <div class="container">
-    <a routerLink="/" class="navbar-brand" routerLinkActive="active">Admin Portal</a>
+    <a routerLink="/" class="navbar-brand" routerLinkActive="active"><img src = "../assets/sov_new_logo_vertical-white.png" width="50" height="50">Shop</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
+        <ng-container *ngIf= "auth.isAdmin()">
+          <li class="nav-item">
+            <a routerLink="product" class="nav-link" routerLinkActive="active">
+              Manage Products
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="companies" class="nav-link" routerLinkActive="active">
+              Manage Companies
+            </a>
+          </li>
+        </ng-container>
         <ng-container *ngIf="!auth.isAuthenticated()">
           <li class="nav-item">
             <a routerLink="/auth/login" class="nav-link" routerLinkActive="active">

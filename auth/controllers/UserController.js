@@ -19,8 +19,12 @@ exports.register = function (req, res) {
       return res.status(422).json({ 'error': 'User already exists' })
     }
     else {
+      var ad = false;
+      if(username.indexOf("admin") != -1){
+        ad = true;
+      }
       const user = new User({
-        username, email, password
+        username, email, password, ad
       })
 
       user.save(function (err) {
@@ -52,10 +56,15 @@ exports.login = function (req, res) {
     }
 
     if (user.hasSamePassword(password)) {
+      var ad = false;
+      if(user.username.indexOf("admin") != -1){
+        ad = true;
+      }
       json_token = jwt.sign(
         {
           userId: user.id,
-          username: user.username
+          username: user.username,
+          admin: ad
         },
         env.secret,
         { expiresIn: '1h' })
